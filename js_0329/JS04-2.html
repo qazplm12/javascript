@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript</title>
+
+    <script>
+        //
+        // while문 : for문과 같은 반복문 중 하나
+        // 기본 형태는 반복 조건만 존재하는 형식으로 간단하게 반복문을 사용하고자 할 경우 사용함
+        // 실제 사용에서는 초기값을 while문 외부에서 선언하고 사용함
+        // while문을 동시에 2개 이상 사용 시 동일한 이름의 초기값 변수의 값을 다시 초기화해야함
+        // 증감식을 while문 내부에 선언하여 사용함
+        // 증감식의 위치가 반복 실행할 소스코드의 위치에 따라 결과값이 변경될 수 있음
+        // 탈출 조건을 정확히 명시하지 않을 경우 무한 루프에 빠질 가능성이 높음
+
+        // 사용법 :
+        // 초기값
+        // while(반복조건){
+        //      반복조건이 true일 경우 반복 실행할 소스코드
+        //      증감식
+
+        console.log('---------------while문으로 0 ~ 9 까지 출력----------------')
+        let count = 0;
+
+        while (count < 10) {
+            console.log(count);
+            count++;
+        }
+
+        console.log('---------------for문으로 0 ~ 9 까지 출력----------------')
+
+        for (let i = 0; i < 10; i++) {
+            console.log(i);
+        }
+
+        console.log('---------------while문 사용시 주의사항----------------')
+        let countNum = 0;
+
+        console.log('첫번째 while문 ---');
+        while (countNum < 5) {
+            console.log('countNum : ' + countNum);
+            countNum++;
+        }
+
+        countNum = 0; // 정상적으로
+        console.log('첫번째 while문 ---');
+        while (countNum < 5) {
+            console.log('countNum : ' + countNum);
+            countNum++;
+        }
+        //
+
+        console.log('---------------while문 사용시 주의사항2----------------')
+
+        let treeHit = 0;
+        while (treeHit < 10) {    // while문 시작과 동시에 증감식 실행
+            treeHit++;
+            console.log('나무를 ' + treeHit + '번 찍었습니다');
+            // treeHit++; // while문 중간에 증감식 실행
+            if (treeHit == 10) {
+                console.log('나무가 넘어 갑니다.')
+            }
+            ;
+        }
+
+        for (let i = 1; i < 11; i++) {
+            console.log('나무를 ' + i + ' 번 찍었습니다.')
+            if (i == 10) {
+                console.log('나무가 넘어갑니다)');
+            }
+        }
+        console.log('---------------while문 사용시 주의사항3----------------')
+        treeHit = 1;
+
+        while (treeHit < 10) {
+            console.log('나무를' + treeHit + '번 찍었습니다.')
+            if (treeHit == 10) {
+                console.log('나무가 넘어갑니다.');
+            }
+            treeHit++;
+        }
+
+        // 문제 3) while문을 사용하여 구구단 중 5단을 모두 출력하는 프로그래믈 작성하세요
+
+        let dan = 1;
+        while (dan < 10) {
+            console.log('5' + ' * ' + dan + ' = ' + dan * 5);
+            dan++;
+        }
+
+        // 문제 4) while문을 사용하여 구구단 전체를 출력하는 프로그램을 작성하세요
+
+        dan = 2;
+        let dan2 = 0;
+        while (dan < 10) {
+            console.log('-----' + dan + '단-------');
+            dan2 = 1;
+            while (dan2 < 10) {
+                console.log(dan + ' * ' + dan2 + ' = ' + dan * dan2);
+                dan2++;
+            }
+            dan++;
+        }
+
+        // 문제 5) 배열과 반복문을 사용하여 로또 번호 생서 프로그램을 작성하세요
+        // * for 나 while을 사용하여 랜덤 숫자를 6번 실행하여 배열에 저장
+        // ** 중복제거 필수
+        // *** 배열이름 : let lotto = [];
+        let lotto = [];
+
+
+        for (let i = 0; i < 6; i++) {
+            lotto[i] = Math.floor(Math.random() * 45) + 1;
+
+            for (let j = 0; j < i; j++) {
+
+                if (i != j && lotto[i] == lotto[j]) {
+                    lotto[i] = Math.floor(Math.random() * 45) + 1;
+                    // i--;
+                }
+            }
+        }
+
+        lotto.sort(function (comp1, comp2) {
+            return comp1 - comp2;
+        });
+
+        console.log(lotto);
+        // do ~ while : 기본적으로 while문과 동일한 반복문, 무조건 1번은 while문을 실행하는 반복문
+        // while문은 반복 조건을 먼저 검사하고 결과가 true일 경우에만 코드블록을 반복 실행함
+        // while문은 반복 조건이 false일경우 코드블록을 한번도 실행하지 않음
+        //  do ~ while문은 반복 조건이 코드블록의 아래에 존재하기 때문에 무조건 코드블록을 한번은 실행하고,
+        // 반복 조건을 검사하여 결과가 true이면코드 블록을 계속 반복실행하고, 결과가 false이면 종료하는 반복문
+        // 사용법 :
+        // do {
+        //     반복실행될 소스코드
+        //     증감치
+        // } while (반복 조건);
+
+        console.log('\n ---------------- 반복 조건의 결과가 true일 경우 do ~ while 사용시 ----------------\n')
+        count = 0;
+        do {
+            console.log('count의 값 : ' + count);
+            count++;
+        } while(count < 5);
+
+        console.log('\n ---------------- 반복 조건의 결과가 false일 경우 do ~ while 사용시 ----------------\n')
+        count = 10;
+        do {
+            console.log('count의 값 : ' + count);
+            count++;
+        } while(count < 5);
+
+
+        console.log('\n ---------------- while 사용시 ----------------\n')
+
+        count = 0;
+        while (count < 5) {
+            console.log('count의 값 : ' + count);
+            count++;
+        }
+
+
+        console.log('\n ---------------- 반복 조건의 결과가 false일 경우 do ~ while 사용시 ----------------\n')
+
+        count = 10;
+        while (count < 5) {
+            console.log('count의 값 : ' + count);
+            count++;
+        }
+
+        //
+    </script>
+</head>
+<body>
+
+</body>
+</html>
